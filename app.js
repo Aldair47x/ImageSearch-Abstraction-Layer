@@ -5,7 +5,6 @@ var bodyParser = require('body-parser');
 var cors = require('cors');
 var index = require('./routes/index');
 var app = express();
-var Bing = require('node-bing-api')({accKey:'c12dc7a598e24fa19d19257794b066db'});
 var mongoose = require('mongoose');
 var url = process.env.MONGOLAB_URI;
 var searchTerm = require('./models/searchTerm.js');
