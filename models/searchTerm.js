@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const searchSchema = new Schema(
+const searchTermSchema  = new Schema(
     {
         searchValue : String,
         searchDate : Date
@@ -9,5 +9,5 @@ const searchSchema = new Schema(
     {timestamps : true}
 );
 
-const ModelClass = mongoose.model('searchTerm', searchSchema);
+const ModelClass = mongoose.model('searchTerm', searchTermSchema);
 module.exports = ModelClass;

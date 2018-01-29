@@ -8,6 +8,7 @@ var app = express();
 var Bing = require('node-bing-api')({accKey:'c12dc7a598e24fa19d19257794b066db'});
 var mongoose = require('mongoose');
 var url = process.env.MONGOLAB_URI;
+var searchTerm = require('./models/searchTerm.js');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -19,9 +20,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 
-
-mongoose.connect('mongodb://heroku_qg2qch4m:70u26trgp2t7e64c8gln8td4rb@ds263707.mlab.com:63707/heroku_qg2qch4m' || 'mongodb://localhost/Schema');
-
+mongoose.connect('mongodb://localhost/searchTerm');
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var Schema = require('../models/Schema.js');
+var searchTerm = require('../models/searchTerm.js');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -10,8 +10,23 @@ router.get('/', function(req, res, next) {
 router.get('/api/imagesearch/:searchValue*', (req,res,next) =>{
    var {searchValue} = req.params;
    var {offset} = req.query;
+  
 
-   return res.json({searchValue,offset});
+   var data = new searchTerm({
+     searchValue,
+     searchDate : new Date()
+   });
+
+
+   data.save(err => {
+     if(err){
+      return res.send("Error saving in the DB");
+     }
+     
+
+     return res.json({data});
+   })
+   
 })
 
 
