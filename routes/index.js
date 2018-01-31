@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
-var Bing = require('node-bing-api')({accKey:'d946a1f9428048e08ad3456b394da127'});
+//You need to put here your bing api key
+//var Bing = require('node-bing-api')({accKey:'xxxxxxxx'});
 var searchTerm = require('../models/searchTerm.js');
-//const { Requester } = require("node-duckduckgo");
-//const requester = new Requester("app");
+const { Requester } = require("node-duckduckgo");
+const requester = new Requester("app");
 
 
 
@@ -55,7 +56,7 @@ router.get('/api/imagesearch/:searchValue*', (req,res,next) =>{
   }
 );
 
-*/
+
 
 Bing.images(searchValue, {
   top:10
@@ -65,33 +66,20 @@ function(error,rez,body){
 res.json(body);  
 }
 );
-
+*/
 //Api duck duck go
-
-/*
-requester.skip_disambig = offset * 10;
-requester.format = "json";
-requester.pretty = 1;
+const formatter = requester.formatter;
+formatter.pretty = 1;
+requester.no_html = 1;
+requester.no_redirect = 1;
 requester.request(searchValue,
 (err, response, body) => {
   if (err) {
     console.log(err);
     return;
   }
-  var bingDataSet = [];
-
-  for(var i=0;i<10;i++)
-  {
-    bingDataSet.push({
-    url: body.Url,
-    snippet: body.Heading,
-    thumbnail: body.Icon,
-    context: body.DefinitionSource
-    });
-  }
-  res.json(bingDataSet);  
+  res.json({body})
 });
-*/
 
    
 })
